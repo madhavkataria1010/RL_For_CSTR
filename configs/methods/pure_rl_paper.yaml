@@ -1,0 +1,46 @@
+method:
+  id: "pure_rl_paper"
+  report_name: "Pure-RL (paper baseline)"
+  role:
+    - "paper_reproduction"
+    - "extended_benchmark"
+  controller_type: "direct_action_rl"
+  implementation_status: "scaffold_only"
+
+paper_exact:
+  source_files:
+    - "CIRL/training_CIRL.py"
+    - "CIRL/cirl_policy.py"
+  policy:
+    hidden_sizes: [128, 128]
+    activation: "ReLU"
+    input_size: 15
+    output_size: 2
+    extra_hidden_layers_declared: 1
+    extra_hidden_layers_used_in_forward: 0
+    final_output: "tanh"
+  action_interface:
+    type: "normalized_direct_action"
+    action_dim: 2
+    normalized_bounds: [-1.0, 1.0]
+    physical_bounds:
+      tc: [290.0, 400.0]
+      fin: [99.0, 105.0]
+  optimizer_family:
+    random_search_initializations: 30
+    random_init_uniform_range: [-0.1, 0.1]
+    pso:
+      inertial_weight: 0.6
+      num_particles: 30
+      max_iter: 150
+    objective_rollout_repetitions: 3
+    training_repetitions_for_paper_figures: 10
+  artifact_replay:
+    nominal_reference_pickle: "data/results_rl_network_rep_newobs_0.pkl"
+    disturbance_reference_weights: "data/best_policy_rl_dist.pth"
+    nominal_figure_policy_selector: "inter[1]['p_list'][149]"
+  evaluation:
+    deterministic_inference: true
+
+benchmark_policy:
+  rename_guard: "Do not rename this method to vanilla RL."

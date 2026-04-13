@@ -1,0 +1,27 @@
+scenario:
+  id: "disturbance"
+  tier: 1
+  role:
+    - "paper_reproduction"
+    - "extended_benchmark"
+  implementation_status: "scaffold_only"
+
+paper_exact:
+  train_env:
+    ns: 120
+    test: false
+    dist: true
+    dist_train: true
+    cb_setpoint_constant: 0.4
+    v_setpoint_constant: 100.0
+    disturbance_activation_step: 70
+    training_ca_in_values: [1.7, 1.6, 1.9]
+  eval_env:
+    ns: 120
+    test: true
+    dist: true
+    dist_train: false
+    cb_setpoint_constant: 0.4
+    v_setpoint_constant: 100.0
+    disturbance_activation_step: 70
+    eval_ca_in_value: 1.75

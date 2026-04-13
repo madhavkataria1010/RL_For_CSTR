@@ -1,0 +1,35 @@
+method:
+  id: "static_pid"
+  report_name: "Static PID"
+  role:
+    - "paper_reproduction"
+    - "extended_benchmark"
+  controller_type: "static_pid"
+  implementation_status: "scaffold_only"
+
+paper_exact:
+  source_file: "CIRL/static_pid_gains.py"
+  action_interface:
+    type: "normalized_pid_gains"
+    action_dim: 6
+    normalized_bounds: [-1.0, 1.0]
+    physical_gain_bounds:
+      lower: [-5.0, 0.0, 0.01, 0.0, 0.0, 0.01]
+      upper: [25.0, 20.0, 10.0, 1.0, 2.0, 1.0]
+  tuning:
+    optimizer: "scipy_differential_evolution"
+    bounds_normalized: [[-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0], [-1.0, 1.0]]
+    maxiter: 150
+    evaluation_repetitions: 1
+    tuning_env:
+      test: true
+      ns: 360
+  output_artifacts:
+    official_gain_file_nominal: "data/constant_gains.npy"
+    official_gain_file_highop: "data/constant_gains_highop.npy"
+    project_gain_file: "results/processed/pid_tuning.json"
+
+benchmark_policy:
+  retune_per_scenario: false
+  notes:
+    - "Tune once on nominal setup, then freeze for all extended benchmarks."

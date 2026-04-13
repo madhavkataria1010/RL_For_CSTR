@@ -1,0 +1,139 @@
+project:
+  title: "Safe and Robust Control-Informed Reinforcement Learning for Nonlinear Chemical Process Control"
+  stage: "execution_ready_pipeline"
+  reproducibility_first: true
+  contribution_method: "dr_cirl"
+
+source_of_truth:
+  paper:
+    arxiv_id: "2408.13566"
+    journal_doi: "10.1021/acs.iecr.4c03233"
+  official_repo:
+    owner_repo: "OptiMaL-PSE-Lab/CIRL"
+    pinned_commit: "c3fd22580a15d1e008570c08e78b38cdd887ef2c"
+    expected_local_path: "/tmp/CIRL_ref"
+  key_reference_files:
+    - "CIRL/cstr_model.py"
+    - "CIRL/cirl_policy.py"
+    - "CIRL/training_CIRL.py"
+    - "CIRL/static_pid_gains.py"
+    - "CIRL/SP_vis_paper.py"
+    - "CIRL/SP_vis_paper_highop.py"
+    - "CIRL/learning_curve_vis.py"
+    - "CIRL/dist_vis_presentation.py"
+    - "CIRL/network_size_vis.py"
+    - "CIRL/RGA.py"
+
+paths:
+  results_raw: "results/raw"
+  results_processed: "results/processed"
+  results_figures: "results/figures"
+  results_tables: "results/tables"
+  analysis_notebook: "notebooks/analysis.ipynb"
+
+method_sets:
+  paper_reproduction:
+    - "static_pid"
+    - "pure_rl_paper"
+    - "cirl_reproduced"
+    - "cirl_highop_extended_paper"
+  modern_rl_baselines:
+    - "sac"
+    - "td3"
+    - "tqc"
+    - "ppo"
+  project_contribution:
+    - "dr_cirl"
+
+execution_priority:
+  after_reproduction:
+    - "sac"
+    - "td3"
+    - "dr_cirl"
+    - "tqc"
+    - "ppo"
+
+execution_schedule:
+  local_debug:
+    seeds: [0]
+    scenarios: ["nominal"]
+    smoke_test_only: true
+  cuda_validation:
+    seeds: [0, 1, 2]
+    scenarios: ["nominal", "uncertainty_pm10"]
+  cuda_full:
+    seeds: [0, 1, 2, 3, 4]
+    scenarios_tier_1:
+      - "nominal"
+      - "disturbance"
+      - "highop"
+      - "uncertainty_pm10"
+      - "uncertainty_pm20"
+  paper_learning_curves:
+    seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+logging:
+  timestamped_run_dirs: true
+  never_overwrite: true
+  save_raw_trajectories_csv: true
+  save_processed_csv: true
+  save_processed_markdown: true
+  save_png: true
+  save_pdf: true
+
+metrics:
+  tracking:
+    - "iae"
+    - "ise"
+    - "itae"
+    - "rmse"
+  transient:
+    - "overshoot"
+    - "settling_time"
+  control_effort:
+    - "mean_absolute_input"
+    - "total_variation"
+    - "max_control_magnitude"
+  robustness_safety:
+    - "constraint_violations"
+    - "constraint_violation_magnitude"
+    - "recovery_time"
+    - "saturation_count"
+    - "saturation_duration"
+  rl_specific:
+    - "episode_return"
+    - "reward_variance_across_seeds"
+  ranking:
+    - "average_rank"
+
+fairness_rules:
+  same_environment_dynamics_per_scenario: true
+  same_observation_channels_where_applicable: true
+  same_action_bounds: true
+  same_evaluation_horizon: true
+  same_initial_conditions: true
+  same_disturbance_schedules: true
+  same_uncertainty_schedules_per_seed: true
+  same_total_environment_steps: true
+  same_evaluation_frequency: true
+  same_number_of_evaluation_episodes: true
+  same_model_selection_rule: true
+  same_final_evaluation_protocol: true
+  deterministic_final_inference_where_applicable: true
+  pid_tuned_once_and_frozen: true
+  no_per_scenario_retuning_after_freeze: true
+
+device_policy:
+  preferred_order:
+    - "cuda"
+    - "mps"
+    - "cpu"
+  local_mps_use: "debug_only"
+  final_results_source: "cuda"
+
+reporting_language:
+  - "The paper reproduction remains faithful to the original methods."
+  - "SAC, TD3, TQC, and PPO are added as standardized modern RL baselines for broader comparison."
+  - "SAC is the primary modern RL comparator."
+  - "TQC is included as a stronger continuous-control baseline when feasible."
+  - "DR-CIRL remains the project’s only new method."

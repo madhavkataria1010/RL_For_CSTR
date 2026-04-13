@@ -1,0 +1,15 @@
+scenario:
+  id: "unseen_setpoints"
+  tier: 2
+  role:
+    - "extended_benchmark_optional"
+  implementation_status: "scaffold_only"
+
+benchmark_extended:
+  enabled_if_time_allows: true
+  train_profile_reference: "nominal.paper_exact.train_env.sequential_training_profiles"
+  eval_profile:
+    cb_setpoints: [0.075, 0.45, 0.725]
+    v_setpoint: 100.0
+  note:
+    - "This optional benchmark reuses the held-out nominal test profile as the unseen setpoint evaluation."

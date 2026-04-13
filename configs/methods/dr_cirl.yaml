@@ -1,0 +1,39 @@
+method:
+  id: "dr_cirl"
+  report_name: "DR-CIRL"
+  role:
+    - "project_contribution"
+    - "extended_benchmark"
+  controller_type: "control_informed_rl"
+  implementation_status: "scaffold_only"
+
+inherits_from: "cirl_reproduced"
+
+frozen_rules:
+  same_architecture_as_cirl_reproduced: true
+  same_optimizer_family_as_cirl_reproduced: true
+  same_reward_cost_as_cirl_reproduced: true
+  same_observation_design_as_cirl_reproduced: true
+  no_reward_shaping_change: true
+  no_architecture_change: true
+  no_observation_filtering_change: true
+  only_domain_randomization_change: true
+
+domain_randomization:
+  training_range_percent: 10
+  stress_test_ranges_percent: [10, 20]
+  distribution: "uniform"
+  parameters:
+    ca_in:
+      official_nominal: 1.0
+      enabled: true
+    ua:
+      official_nominal: 50000.0
+      enabled: true
+    k0_group_scale:
+      official_nominal: 1.0
+      enabled: true
+
+benchmark_standardization:
+  shared_budget_with_modern_rl_baselines: true
+  deterministic_inference_for_final_benchmark: true

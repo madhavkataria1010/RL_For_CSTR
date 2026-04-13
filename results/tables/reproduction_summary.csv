@@ -1,0 +1,9 @@
+method,scenario,paper_reference_value,reproduced_value_mean,reproduced_value_std,relative_gap_percent,notes
+Static PID,nominal,-1.77,-1.7734895045012264,0.005131327018575401,-0.19714714696194496,exact paper table value; evaluated via official constant_gains.npy
+Pure-RL (paper baseline),nominal,-2.08,-15.371803594866435,9.984999225390188,-639.0290189839632,exact paper table value
+CIRL reproduced,nominal,-1.33,-1.604204660591847,0.0022971107976728048,-20.616891773823074,exact paper table value; evaluated via official results_pid_network_rep_newobs_1.pkl -> inter[0]['p_list'][149]
+Pure-RL (paper baseline),disturbance,-1.76,-10.459033669725116,4.87855367371752,-494.2632766889271,exact paper table value
+CIRL reproduced,disturbance,-1.38,-1.4533614410048277,0.11486167190487025,-5.316046449625202,exact paper table value
+Static PID,highop,-6.81,-6.947269740959623,0.010284631831605294,-2.0157083841354377,exact paper table value; evaluated via official constant_gains_highop.npy
+CIRL reproduced,highop,-4.04,-2.743045567524625,0.007086358737015476,32.10283248701423,exact paper table value; evaluated via official low-op CIRL from results_pid_network_rep_newobs_1.pkl -> inter[0]['p_list'][149]
+CIRL high-op extended (paper reproduction only),highop,-2.07,-2.1703061985773435,0.05887527026213802,-4.845710076200178,exact paper table value

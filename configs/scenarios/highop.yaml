@@ -1,0 +1,23 @@
+scenario:
+  id: "highop"
+  tier: 1
+  role:
+    - "paper_reproduction"
+    - "extended_benchmark"
+  implementation_status: "scaffold_only"
+
+paper_exact:
+  train_env:
+    ns: 120
+    test: false
+    highop: true
+    cb_setpoints: [0.50, 0.90, 0.90]
+    v_setpoint: 100.0
+  eval_env:
+    ns: 120
+    test: true
+    highop: true
+    cb_setpoints: [0.45, 0.88, 0.88]
+    v_setpoint: 100.0
+  reproduction_use:
+    compare_lowop_trained_cirl_against_extended_highop_cirl: true

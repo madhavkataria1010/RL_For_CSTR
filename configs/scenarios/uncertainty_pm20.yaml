@@ -1,0 +1,18 @@
+scenario:
+  id: "uncertainty_pm20"
+  tier: 1
+  role:
+    - "extended_benchmark"
+  implementation_status: "scaffold_only"
+
+benchmark_extended:
+  perturbation_percent: 20
+  parameters:
+    - "ca_in"
+    - "ua"
+    - "k0_group_scale"
+  schedule:
+    mode: "one_at_a_time_and_aggregate"
+    values_percent: [-20, 20]
+  notes:
+    - "Use the same perturbation schedule per seed across all compared methods."

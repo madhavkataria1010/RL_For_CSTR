@@ -1,0 +1,26 @@
+method:
+  id: "cirl_highop_extended_paper"
+  report_name: "CIRL high-op extended (paper reproduction only)"
+  role:
+    - "paper_reproduction_only"
+  controller_type: "control_informed_rl"
+  implementation_status: "scaffold_only"
+
+paper_exact:
+  source_files:
+    - "CIRL/training_CIRL.py"
+    - "CIRL/SP_vis_paper_highop.py"
+  purpose: "Reproduce the paper's high-operating-point extension result only."
+  policy:
+    hidden_sizes: [16, 16]
+    activation: "ReLU"
+    input_size: 15
+    output_size: 6
+  training:
+    highop: true
+    optimizer_family_same_as_cirl_reproduced: true
+  artifact_replay:
+    extended_highop_weights: "data/best_policy_pid_highop_0.pth"
+    comparison_lowop_pickle: "data/results_pid_network_rep_newobs_1.pkl"
+    comparison_lowop_selector: "inter[0]['p_list'][149]"
+    static_pid_highop_gains: "data/constant_gains_highop.npy"

@@ -1,0 +1,15 @@
+execution:
+  id: "accelerated_8h"
+  device_preference: ["cuda", "cpu"]
+  seeds: [0, 1, 2]
+  scenarios_tier_1:
+    - "nominal"
+    - "disturbance"
+    - "highop"
+    - "uncertainty_pm10"
+    - "uncertainty_pm20"
+  report_results: true
+  purpose:
+    - "time-boxed eight hour execution profile"
+    - "three-seed tier-1 benchmark coverage"
+    - "full modern RL budget with compressed paper-family training"

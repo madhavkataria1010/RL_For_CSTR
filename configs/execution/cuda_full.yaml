@@ -1,0 +1,19 @@
+execution:
+  id: "cuda_full"
+  device_preference: ["cuda", "cpu"]
+  seeds: [0, 1, 2, 3, 4]
+  scenarios_tier_1:
+    - "nominal"
+    - "disturbance"
+    - "highop"
+    - "uncertainty_pm10"
+    - "uncertainty_pm20"
+  scenarios_tier_2:
+    - "noise"
+    - "saturation"
+    - "unseen_setpoints"
+  report_results: true
+  purpose:
+    - "final benchmark tables"
+    - "final benchmark figures"
+    - "final ranking tables"

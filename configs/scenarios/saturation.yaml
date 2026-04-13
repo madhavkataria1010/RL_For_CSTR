@@ -1,0 +1,18 @@
+scenario:
+  id: "saturation"
+  tier: 2
+  role:
+    - "extended_benchmark_optional"
+  implementation_status: "scaffold_only"
+
+benchmark_extended:
+  enabled_if_time_allows: true
+  actuator_bounds:
+    tc: [290.0, 450.0]
+    fin: [99.0, 105.0]
+  rate_limit:
+    status: "freeze_during_implementation"
+  report_metrics:
+    - "saturation_count"
+    - "saturation_duration"
+    - "performance_drop_vs_nominal"

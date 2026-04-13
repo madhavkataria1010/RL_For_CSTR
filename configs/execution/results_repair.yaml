@@ -1,0 +1,15 @@
+execution:
+  id: "results_repair"
+  device_preference: ["cuda", "cpu"]
+  seeds: [0, 1, 2, 3, 4]
+  scenarios_tier_1:
+    - "nominal"
+    - "disturbance"
+    - "highop"
+    - "uncertainty_pm10"
+    - "uncertainty_pm20"
+  report_results: true
+  purpose:
+    - "high-budget repair pass for weak reproduction rows"
+    - "five-seed tier-1 benchmark refresh"
+    - "stronger modern RL checkpoint selection"

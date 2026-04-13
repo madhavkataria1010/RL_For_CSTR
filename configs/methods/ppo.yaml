@@ -1,0 +1,35 @@
+method:
+  id: "ppo"
+  report_name: "PPO"
+  role:
+    - "modern_rl_baseline"
+    - "extended_benchmark"
+  controller_type: "modern_rl"
+  implementation_status: "scaffold_only"
+
+benchmark_standardization:
+  library: "stable-baselines3"
+  algorithm: "PPO"
+  priority: 5
+  action_interface: "normalized_direct_action"
+  normalized_action_bounds: [-1.0, 1.0]
+  physical_action_bounds:
+    tc: [290.0, 400.0]
+    fin: [99.0, 105.0]
+  observation_interface: "same_as_reproduced_environment"
+  reward_handling:
+    environment_returns_cost: true
+    optimizer_receives_reward: "-cost"
+    log_reward_and_cost: true
+  training_budget:
+    shared_with: ["sac", "td3", "tqc", "dr_cirl"]
+    total_environment_steps: null
+    evaluation_frequency: null
+    evaluation_episodes: null
+    model_selection_rule: null
+  final_evaluation:
+    deterministic_inference: true
+  hyperparameters:
+    status: "freeze_before_final_benchmark"
+  scope_control:
+    stop_extra_tuning_if_clearly_weak_after_cuda_validation: true

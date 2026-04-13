@@ -1,0 +1,12 @@
+execution:
+  id: "cuda_validation"
+  device_preference: ["cuda", "cpu"]
+  seeds: [0, 1, 2]
+  scenarios:
+    - "nominal"
+    - "uncertainty_pm10"
+  report_results: false
+  purpose:
+    - "training stability check"
+    - "config correctness"
+    - "metric aggregation sanity check"

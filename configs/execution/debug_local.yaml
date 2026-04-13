@@ -1,0 +1,12 @@
+execution:
+  id: "debug_local"
+  device_preference: ["mps", "cpu", "cuda"]
+  seeds: [0]
+  scenarios:
+    - "nominal"
+  smoke_test_horizon_steps: 30
+  report_results: false
+  purpose:
+    - "environment integration"
+    - "wrapper checks"
+    - "logging and plotting debug"

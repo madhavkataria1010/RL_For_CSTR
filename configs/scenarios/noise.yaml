@@ -1,0 +1,20 @@
+scenario:
+  id: "noise"
+  tier: 2
+  role:
+    - "extended_benchmark_optional"
+  implementation_status: "scaffold_only"
+
+benchmark_extended:
+  enabled_if_time_allows: true
+  noise_type: "gaussian_sensor_noise"
+  target_channels:
+    - "C_B"
+    - "T"
+    - "V"
+  levels:
+    - "low"
+    - "medium"
+    - "high"
+  note:
+    - "Official code injects small uniform measurement noise; this benchmark extends that into explicit Gaussian stress tests."

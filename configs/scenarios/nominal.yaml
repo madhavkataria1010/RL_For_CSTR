@@ -1,0 +1,28 @@
+scenario:
+  id: "nominal"
+  tier: 1
+  role:
+    - "paper_reproduction"
+    - "extended_benchmark"
+  implementation_status: "scaffold_only"
+
+paper_exact:
+  train_env:
+    ns: 120
+    test: false
+    dist: false
+    highop: false
+    sequential_training_profiles:
+      - cb_setpoints: [0.70, 0.75, 0.86]
+      - cb_setpoints: [0.10, 0.20, 0.30]
+      - cb_setpoints: [0.40, 0.50, 0.60]
+    v_setpoint: 100.0
+  eval_env:
+    ns: 120
+    test: true
+    dist: false
+    highop: false
+    cb_setpoints: [0.075, 0.45, 0.725]
+    v_setpoint: 100.0
+  plot_time_axis_minutes: 25
+  integration_time_axis_minutes: 100

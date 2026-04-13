@@ -1,0 +1,40 @@
+method:
+  id: "cirl_reproduced"
+  report_name: "CIRL reproduced"
+  role:
+    - "paper_reproduction"
+    - "extended_benchmark"
+  controller_type: "control_informed_rl"
+  implementation_status: "scaffold_only"
+
+paper_exact:
+  source_files:
+    - "CIRL/training_CIRL.py"
+    - "CIRL/cirl_policy.py"
+    - "CIRL/cstr_model.py"
+  policy:
+    hidden_sizes: [16, 16]
+    activation: "ReLU"
+    input_size: 15
+    output_size: 6
+    embedded_pid_layer: true
+    final_output: "tanh"
+  pid_parameter_mapping:
+    normalized_bounds: [-1.0, 1.0]
+    physical_gain_bounds:
+      lower: [-5.0, 0.0, 0.01, 0.0, 0.0, 0.01]
+      upper: [25.0, 20.0, 10.0, 1.0, 2.0, 1.0]
+  optimizer_family:
+    random_search_initializations: 30
+    random_init_uniform_range: [-0.1, 0.1]
+    pso:
+      inertial_weight: 0.6
+      num_particles: 30
+      max_iter: 150
+    objective_rollout_repetitions: 3
+    training_repetitions_for_paper_figures: 10
+  artifact_replay:
+    nominal_reference_pickle: "data/results_pid_network_rep_newobs_1.pkl"
+    nominal_figure_policy_selector: "inter[0]['p_list'][149]"
+  evaluation:
+    deterministic_inference: true
