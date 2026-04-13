@@ -122,15 +122,14 @@ def _paper_eval_overrides(merged_config: dict[str, Any], scenario_id: str) -> di
 
 
 def _prefer_official_artifact(method_id: str, scenario_id: str) -> bool:
+    # Only static_pid and CIRL-pkl artifacts are verified compatible with this env.
+    # Official .pth checkpoints for pure_rl and cirl disturbance/highop-extended
+    # produce catastrophic results (-1000s) due to architecture/obs-space mismatch.
     return (method_id, scenario_id) in {
         ("static_pid", "nominal"),
         ("static_pid", "highop"),
-        ("pure_rl_paper", "nominal"),
-        ("pure_rl_paper", "disturbance"),
         ("cirl_reproduced", "nominal"),
-        ("cirl_reproduced", "disturbance"),
         ("cirl_reproduced", "highop"),
-        ("cirl_highop_extended_paper", "highop"),
     }
 
 

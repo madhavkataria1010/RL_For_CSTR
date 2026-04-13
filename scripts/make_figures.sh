@@ -8,3 +8,6 @@ if [[ ! -x "${PYTHON_BIN}" ]]; then
 fi
 
 "${PYTHON_BIN}" -m src.plotting.summary_tables
+"${PYTHON_BIN}" -m src.plotting.report_figures
+"${PYTHON_BIN}" -m src.plotting.concept_diagrams
+"${PYTHON_BIN}" -m src.plotting.paper_figure_assets
